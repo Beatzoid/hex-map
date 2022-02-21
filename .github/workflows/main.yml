@@ -43,6 +43,7 @@ jobs:
                   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
               with:
                   githubToken: ${{ secrets.GITHUB_TOKEN }}
+                  customImage: "unityci/editor:2020.1.14f1-base-0"
 
             # Build
             - name: Build project
