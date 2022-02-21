@@ -44,6 +44,25 @@ jobs:
               with:
                   githubToken: ${{ secrets.GITHUB_TOKEN }}
                   customImage: "unityci/editor:2020.1.14f1-base-0"
+                  customParameters: "-nographics"
+
+            - name: "Freeing up disk space on CI system"
+              run: |
+                  # Before
+                  echo "Disk space before:"
+                  df -h
+
+                  echo "Removing large directories"
+                  # https://github.com/apache/flink/blob/master/tools/azure-pipelines/free_disk_space.sh
+                  rm -rf /usr/share/dotnet/
+
+                  # https://github.com/actions/virtual-environments/issues/709#issuecomment-612569242
+                  rm -rf "/usr/local/share/boost"
+                  rm -rf "$AGENT_TOOLSDIRECTORY"
+
+                  # After
+                  echo "Disk space after:"
+                  df -h
 
             # Build
             - name: Build project
