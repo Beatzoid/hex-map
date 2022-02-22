@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +21,10 @@ public class HexMesh : MonoBehaviour
         triangles = new List<int>();
     }
 
+
+    /// <summary>
+    /// Triangulate the mesh
+    /// </summary>
     public void Triangulate(HexCell[] cells)
     {
         hexMesh.Clear();

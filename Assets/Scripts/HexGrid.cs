@@ -1,17 +1,21 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// The HexGrid class is responsible for creating the hexagonal grid
+/// </summary>
 public class HexGrid : MonoBehaviour
 {
+    /* The width of the grid */
     public int width = 6;
+    /* The height of the grid */
     public int height = 6;
 
     public HexCell cellPrefab;
     public TextMeshProUGUI cellLabelPrefab;
 
+    /* The default color for the map */
     public Color defaultColor = Color.white;
-    public Color touchedColor = Color.blue;
 
     HexCell[] cells;
     Canvas gridCanvas;
@@ -39,6 +43,11 @@ public class HexGrid : MonoBehaviour
         hexMesh.Triangulate(cells);
     }
 
+    ///
+    /// <summary>
+    /// Colors a cell at the given position with the given color
+    /// </summary>
+    ///
     public void ColorCell(Vector3 position, Color color)
     {
         position = transform.InverseTransformPoint(position);
@@ -58,7 +67,7 @@ public class HexGrid : MonoBehaviour
         position.y = 0f;
         position.z = z * (HexMetrics.outerRadius * 1.5f);
 
-        HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
+        HexCell cell = cells[i] = Instantiate(cellPrefab);
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
@@ -91,8 +100,7 @@ public class HexGrid : MonoBehaviour
             }
         }
 
-        TextMeshProUGUI label = Instantiate<TextMeshProUGUI>(cellLabelPrefab);
-        label.rectTransform.SetParent(gridCanvas.transform, false);
+        TextMeshProUGUI label = Instantiate(cellLabelPrefab, gridCanvas.transform, false);
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
         label.text = cell.coordinates.ToStringOnSeparateLines();
     }

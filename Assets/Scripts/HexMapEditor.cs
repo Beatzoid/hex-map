@@ -24,14 +24,18 @@ public class HexMapEditor : MonoBehaviour
 
     void HandleInput()
     {
-        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(inputRay, out hit))
+        Ray inputRay = Camera.main!.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(inputRay, out RaycastHit hit))
         {
             hexGrid.ColorCell(hit.point, activeColor);
         }
     }
 
+
+    /// <summary>
+    /// Select a color with the given index
+    /// </summary>
     public void SelectColor(int index)
     {
         activeColor = colors[index];
