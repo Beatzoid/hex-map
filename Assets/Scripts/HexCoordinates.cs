@@ -7,7 +7,6 @@ public struct HexCoordinates
     [SerializeField]
     private int x, z;
 
-
     public int X
     {
         get
