@@ -5,7 +5,9 @@ public class HexMapEditor : MonoBehaviour
 {
     public Color[] colors;
     public HexGrid hexGrid;
+
     private Color activeColor;
+    private int activeElevation;
 
     public void Awake()
     {
@@ -30,13 +32,25 @@ public class HexMapEditor : MonoBehaviour
         activeColor = colors[index];
     }
 
+    public void SetElevation(float elevation)
+    {
+        activeElevation = (int)elevation;
+    }
+
     private void HandleInput()
     {
         Ray inputRay = Camera.main!.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(inputRay, out RaycastHit hit))
         {
-            hexGrid.ColorCell(hit.point, activeColor);
+            EditCell(hexGrid.GetCell(hit.point));
         }
+    }
+
+    private void EditCell(HexCell cell)
+    {
+        cell.color = activeColor;
+        cell.Elevation = activeElevation;
+        hexGrid.Refresh();
     }
 }

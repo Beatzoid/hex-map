@@ -7,7 +7,7 @@ public struct HexCoordinates
 
     public int X => x;
 
-    public int Z => Z;
+    public int Z => z;
 
     public int Y => -X - Z;
 
