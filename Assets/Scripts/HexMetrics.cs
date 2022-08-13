@@ -7,7 +7,7 @@ public static class HexMetrics
     public const float solidFactor = 0.75f;
     public const float blendFactor = 1f - solidFactor;
 
-    static Vector3[] corners = {
+    private static Vector3[] corners = {
         new Vector3(0f, 0f, outerRadius),
         new Vector3(innerRadius, 0f, 0.5f * outerRadius),
         new Vector3(innerRadius, 0f, -0.5f * outerRadius),
@@ -16,7 +16,6 @@ public static class HexMetrics
         new Vector3(-innerRadius, 0f, 0.5f * outerRadius),
         new Vector3(0f, 0f, outerRadius)
     };
-
 
     /// <summary>
     /// Get the first corner of the given direction
@@ -33,6 +32,7 @@ public static class HexMetrics
     {
         return corners[(int)direction + 1];
     }
+
     /// <summary>
     /// Get the first solid corner of the given direction
     /// </summary>
@@ -40,6 +40,7 @@ public static class HexMetrics
     {
         return corners[(int)direction] * solidFactor;
     }
+
     /// <summary>
     /// Get the second solid corner of the given direction
     /// </summary>
@@ -47,6 +48,7 @@ public static class HexMetrics
     {
         return corners[(int)direction + 1] * solidFactor;
     }
+
     /// <summary>
     /// Get the bridge of the given direction
     /// </summary>

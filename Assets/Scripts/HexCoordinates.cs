@@ -3,32 +3,13 @@ using UnityEngine;
 [System.Serializable]
 public struct HexCoordinates
 {
-    [SerializeField]
-    private int x, z;
+    [SerializeField] private int x, z;
 
-    public int X
-    {
-        get
-        {
-            return x;
-        }
-    }
+    public int X => x;
 
-    public int Z
-    {
-        get
-        {
-            return z;
-        }
-    }
+    public int Z => Z;
 
-    public int Y
-    {
-        get
-        {
-            return -X - Z;
-        }
-    }
+    public int Y => -X - Z;
 
     /// <summary>
     /// The HexCoordinates class is responsible for managing and calculating coordinates
@@ -44,7 +25,7 @@ public struct HexCoordinates
     /// </summary>
     public static HexCoordinates FromOffsetCoordinates(int x, int z)
     {
-        return new HexCoordinates(x - z / 2, z);
+        return new HexCoordinates(x - (z / 2), z);
     }
 
     /// <summary>
@@ -56,7 +37,7 @@ public struct HexCoordinates
     }
 
     /// <summary>
-    /// Generate a string with the coordinates on seperate lines
+    /// Generate a string with the coordinates on separate lines
     /// </summary>
     public string ToStringOnSeparateLines()
     {
@@ -71,6 +52,7 @@ public struct HexCoordinates
         float x = position.x / (HexMetrics.innerRadius * 2f);
         float y = -x;
         float offset = position.z / (HexMetrics.outerRadius * 3f);
+
         x -= offset;
         y -= offset;
 

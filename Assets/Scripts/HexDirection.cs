@@ -6,7 +6,7 @@ public enum HexDirection
 public static class HexDirectionExtensions
 {
     /// <summary>
-    /// Get the oopposite of the given direction
+    /// Get the opposite of the given direction
     /// </summary>
     public static HexDirection Opposite(this HexDirection direction)
     {

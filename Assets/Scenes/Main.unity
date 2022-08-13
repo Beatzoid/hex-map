@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028377, g: 0.22571409, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -399,8 +399,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 188.66534, y: 72.67609}
-  m_SizeDelta: {x: -377.3308, y: -145.3522}
+  m_AnchoredPosition: {x: 349.05994, y: 128.73773}
+  m_SizeDelta: {x: -698.1199, y: -257.4755}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432759123
 MonoBehaviour:
@@ -1262,7 +1262,6 @@ MonoBehaviour:
   cellPrefab: {fileID: 1544339983971184708, guid: 2adf48882461f3d46814e180636e9e9b, type: 3}
   cellLabelPrefab: {fileID: 1904930132}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  touchedColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!4 &961818095
 Transform:
   m_ObjectHideFlags: 0
@@ -1751,6 +1750,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2117,6 +2117,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2164,6 +2165,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1769650068}
     m_Modifications:
     - target: {fileID: 1450347041065953980, guid: 19d2fbf77044c4e4e82836e292273a53, type: 3}
@@ -2255,4 +2257,5 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 19d2fbf77044c4e4e82836e292273a53, type: 3}

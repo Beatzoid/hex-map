@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class HexCell : MonoBehaviour
 {
+    [SerializeField] private HexCell[] neighbors;
+
     public HexCoordinates coordinates;
-
     public Color color;
-
-    [SerializeField]
-    HexCell[] neighbors;
 
     /// <summary>
     /// Get the neighbor of a cell in the given direction

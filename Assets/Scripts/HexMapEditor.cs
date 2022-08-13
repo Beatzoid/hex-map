@@ -7,12 +7,12 @@ public class HexMapEditor : MonoBehaviour
     public HexGrid hexGrid;
     private Color activeColor;
 
-    void Awake()
+    public void Awake()
     {
         SelectColor(0);
     }
 
-    void Update()
+    public void Update()
     {
         if (
             Input.GetMouseButton(0) &&
@@ -22,7 +22,15 @@ public class HexMapEditor : MonoBehaviour
         }
     }
 
-    void HandleInput()
+    /// <summary>
+    /// Select a color with the given index
+    /// </summary>
+    public void SelectColor(int index)
+    {
+        activeColor = colors[index];
+    }
+
+    private void HandleInput()
     {
         Ray inputRay = Camera.main!.ScreenPointToRay(Input.mousePosition);
 
@@ -30,14 +38,5 @@ public class HexMapEditor : MonoBehaviour
         {
             hexGrid.ColorCell(hit.point, activeColor);
         }
-    }
-
-
-    /// <summary>
-    /// Select a color with the given index
-    /// </summary>
-    public void SelectColor(int index)
-    {
-        activeColor = colors[index];
     }
 }
