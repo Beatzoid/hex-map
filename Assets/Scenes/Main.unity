@@ -1451,6 +1451,7 @@ MonoBehaviour:
   cellPrefab: {fileID: 1544339983971184708, guid: 2adf48882461f3d46814e180636e9e9b, type: 3}
   cellLabelPrefab: {fileID: 1450347041065953978, guid: 19d2fbf77044c4e4e82836e292273a53, type: 3}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  noiseSource: {fileID: 2800000, guid: e8900c54d000e444f93128ddbcf82b98, type: 3}
 --- !u!4 &961818095
 Transform:
   m_ObjectHideFlags: 0
