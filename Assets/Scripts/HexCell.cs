@@ -45,6 +45,7 @@ public class HexCell : MonoBehaviour
         {
             if (elevation == value) return;
             elevation = value;
+
             Vector3 position = transform.localPosition;
             position.y = value * HexMetrics.elevationStep;
             position.y +=
@@ -56,12 +57,47 @@ public class HexCell : MonoBehaviour
             uiPosition.z = elevation * -HexMetrics.elevationStep;
             uiRect.localPosition = uiPosition;
 
+            if (
+                hasOutgoingRiver &&
+                elevation < GetNeighbor(outgoingRiver).elevation
+            ) RemoveOutgoingRiver();
+
+            if (
+                hasIncomingRiver &&
+                elevation > GetNeighbor(incomingRiver).elevation
+            ) RemoveIncomingRiver();
+
             Refresh();
         }
     }
 
+    public bool HasIncomingRiver => hasIncomingRiver;
+
+    public bool HasOutgoingRiver => hasOutgoingRiver;
+
+    public HexDirection IncomingRiver => incomingRiver;
+
+    public HexDirection OutgoingRiver => outgoingRiver;
+
+    public bool HasRiver => hasIncomingRiver || hasOutgoingRiver;
+
+    public bool HasRiverBeginOrEnd => hasIncomingRiver != hasOutgoingRiver;
+
+    public float StreamBedY
+    {
+        get
+        {
+            return (elevation + HexMetrics.streamBedElevationOffset) * HexMetrics.elevationStep;
+        }
+    }
+
+    public float RiverSurfaceY => (elevation + HexMetrics.riverSurfaceElevationOffset) * HexMetrics.elevationStep;
+
     private int elevation = int.MinValue;
     private Color color;
+
+    private bool hasIncomingRiver, hasOutgoingRiver;
+    private HexDirection incomingRiver, outgoingRiver;
 
     /// <summary>
     /// Get the neighbor of a cell in the given direction
@@ -92,6 +128,67 @@ public class HexCell : MonoBehaviour
         return HexMetrics.GetEdgeType(
             elevation, otherCell.elevation
         );
+    }
+
+    public bool HasRiverThroughEdge(HexDirection direction)
+    {
+        return (hasIncomingRiver && incomingRiver == direction) ||
+               (hasOutgoingRiver && outgoingRiver == direction);
+    }
+
+    public void SetOutgoingRiver(HexDirection direction)
+    {
+        if (hasOutgoingRiver && outgoingRiver == direction) return;
+
+        HexCell neighbor = GetNeighbor(direction);
+        if (!neighbor || elevation < neighbor.elevation) return;
+
+        RemoveOutgoingRiver();
+        if (hasIncomingRiver && incomingRiver == direction) RemoveIncomingRiver();
+
+        hasOutgoingRiver = true;
+        outgoingRiver = direction;
+        RefreshSelfOnly();
+
+        neighbor.RemoveIncomingRiver();
+        neighbor.hasIncomingRiver = true;
+        neighbor.incomingRiver = direction.Opposite();
+        neighbor.RefreshSelfOnly();
+    }
+
+    public void RemoveRiver()
+    {
+        RemoveOutgoingRiver();
+        RemoveIncomingRiver();
+    }
+
+    public void RemoveOutgoingRiver()
+    {
+        if (!hasOutgoingRiver) return;
+
+        hasOutgoingRiver = false;
+        RefreshSelfOnly();
+
+        HexCell neighbor = GetNeighbor(outgoingRiver);
+        neighbor.hasIncomingRiver = false;
+        neighbor.RefreshSelfOnly();
+    }
+
+    public void RemoveIncomingRiver()
+    {
+        if (!hasIncomingRiver) return;
+
+        hasIncomingRiver = false;
+        RefreshSelfOnly();
+
+        HexCell neighbor = GetNeighbor(incomingRiver);
+        neighbor.hasOutgoingRiver = false;
+        neighbor.RefreshSelfOnly();
+    }
+
+    private void RefreshSelfOnly()
+    {
+        chunk.Refresh();
     }
 
     private void Refresh()
